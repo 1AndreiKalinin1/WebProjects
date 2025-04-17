@@ -1,19 +1,20 @@
-// Инициализация Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { getDatabase, ref, onValue, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+
+// Firebase configuration
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    databaseURL: "YOUR_DATABASE_URL",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyDUYlP6T_gK9X0_hjb0hrPbbYBwoK39gC8",
+    authDomain: "chatapi-d8f77.firebaseapp.com",
+    databaseURL: "https://chatapi-d8f77-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "chatapi-d8f77",
+    storageBucket: "chatapi-d8f77.firebasestorage.app",
+    messagingSenderId: "365523003225",
+    appId: "1:365523003225:web:f5834821cbefaf66ff4e48"
 };
 
-// Инициализация Firebase
-firebase.initializeApp(firebaseConfig);
-const database = firebase.database();
-
-import { ref, onValue, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
 // Ждем загрузки DOM
 document.addEventListener('DOMContentLoaded', function() {
@@ -35,10 +36,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Ссылка на сообщения в базе данных
-    const messagesRef = ref(database, 'messages');
+    const messagesRef = firebase.database().ref('messages');
 
     // Загрузка истории чата
-    onValue(messagesRef, (snapshot) => {
+    messagesRef.on('value', (snapshot) => {
         const messages = snapshot.val() || {};
         messagesDiv.innerHTML = ''; // Очищаем текущие сообщения
         
@@ -51,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Отправка сообщения
-    sendButton.addEventListener('click', async function() {
+    sendButton.addEventListener('click', function() {
         const username = nameInput.value.trim();
         const message = messageInput.value.trim();
         
@@ -72,11 +73,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const messageData = {
                 user: username,
                 message: message,
-                timestamp: serverTimestamp()
+                timestamp: firebase.database.ServerValue.TIMESTAMP
             };
             
             // Добавляем сообщение в базу данных
-            await push(messagesRef, messageData);
+            messagesRef.push(messageData);
             messageInput.value = '';
         } catch (error) {
             console.error('Error sending message:', error);
@@ -87,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Функция для отображения сообщений
     function displayMessage(data) {
         const messageElement = document.createElement('div');
-        messageElement.className = `message ${data.isOwner ? 'owner-message' : 'customer-message'}`;
+        messageElement.className = `message ${data.user === "Иван Иванов" ? 'owner-message' : 'customer-message'}`;
         messageElement.innerHTML = `
             <strong>${data.user}</strong> 
             <span class="message-time">${new Date(data.timestamp).toLocaleTimeString()}</span>

@@ -5,41 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/style.css">
     <title>PropertyAgencySite - Панель владельца</title>
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    <script src="static/owner-script.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDUYlP6T_gK9X0_hjb0hrPbbYBwoK39gC8",
+            authDomain: "chatapi-d8f77.firebaseapp.com",
+            databaseURL: "https://chatapi-d8f77-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "chatapi-d8f77",
+            storageBucket: "chatapi-d8f77.firebasestorage.app",
+            messagingSenderId: "365523003225",
+            appId: "1:365523003225:web:f5834821cbefaf66ff4e48"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script type="module" src="static/owner-script.js"></script>
 </head>
 <body>
     <header>
         <h2>PropertyAgencySite</h2>
+        <div class="burger-menu">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+        </div>
         <nav>
             <a href="index.html">Главная</a>
             <a href="objects.html">Объекты</a>
         </nav>
+        <div class="nav-overlay"></div>
     </header>
     <main>
-        <div class="owner-panel">
-            <h2>Панель владельца</h2>
-            <div class="owner-info">
-                <img src="img/owner1.jfif" alt="Владелец" class="owner-photo">
-                <span class="owner-name">Иван Иванов</span>
+        <section class="owner-dashboard">
+            <h1>Общий чат</h1>
+            <div class="chat-info">
+                <p>Сообщения от пользователей</p>
             </div>
-            <div class="chat-wrapper">
-                <div id="chatList" class="chat-list">
-                    <div class="chat-list-header">
-                        <h3>Активные чаты</h3>
-                    </div>
-                    <!-- Список чатов будет добавлен динамически -->
+        </section>
+        <div id="chat" class="chat-container">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <h2>Общий чат</h2>
+                    <span class="online-count">Пользователей онлайн: <span id="onlineCount">0</span></span>
                 </div>
-                <div class="chat-container">
-                    <div class="chat-header">
-                        <h2>Выберите чат</h2>
-                    </div>
-                    <div id="messages" class="messages-container"></div>
-                    <div class="input-container">
-                        <textarea id="messageInput" placeholder="Введите ваш ответ..."></textarea>
-                        <button id="sendButton">Отправить</button>
-                    </div>
-                </div>
+            </div>
+            <div class="messages-container" id="messages"></div>
+            <div class="input-container">
+                <input type="text" id="nameInput" value="Иван Иванов" readonly>
+                <textarea id="messageInput" placeholder="Введите сообщение..."></textarea>
+                <button id="sendButton">Отправить</button>
             </div>
         </div>
     </main>

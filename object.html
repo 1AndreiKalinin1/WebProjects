@@ -5,8 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/style.css">
     <title>PropertyAgencySite - Объект недвижимости</title>
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    <script src="static/script.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDUYlP6T_gK9X0_hjb0hrPbbYBwoK39gC8",
+            authDomain: "chatapi-d8f77.firebaseapp.com",
+            databaseURL: "https://chatapi-d8f77-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "chatapi-d8f77",
+            storageBucket: "chatapi-d8f77.firebasestorage.app",
+            messagingSenderId: "365523003225",
+            appId: "1:365523003225:web:f5834821cbefaf66ff4e48"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script type="module" src="static/script.js"></script>
 </head>
 <body>
     <header>
@@ -19,8 +35,6 @@
         <nav>
             <a href="index.html">Главная</a>
             <a href="objects.html">Объекты</a>
-            <a href="#">О нас</a>
-            <a href="#">Контакты</a>
         </nav>
         <div class="nav-overlay"></div>
     </header>
@@ -31,7 +45,7 @@
                 <div class="thumbnail-container">
                     <img src="img/obj1.jpg" alt="Фото 1" class="thumbnail">
                     <img src="img/obj1_2.avif" alt="Фото 2" class="thumbnail">
-                    <img src="img/obj1_3.avif" alt="Фото 3" class="thumbnail">
+                    <img src="img/obj1.3.avif" alt="Фото 3" class="thumbnail">
                 </div>
             </div>
             <div class="object-info">
@@ -81,6 +95,8 @@
                 </div>
             </div>
         </section>
+        <h1>Чат с владельцем</h1>
+        <a>Если хотите обсудить объект, напишите владельцу в чате</a>
         <div id="chat">
             <div class="chat-header">
                 <div class="owner-info">
@@ -96,5 +112,28 @@
             </div>
         </div>
     </main>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>О нас</h3>
+                <p>Профессиональное агентство недвижимости, помогающее вам найти идеальное жилье.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <p>Телефон: +375(29) 456-78-90</p>
+                <p>Email: info@realestate.by</p>
+                <p>Адрес: г. Минск, ул. Примерная, д. 1</p>
+            </div>
+            <div class="footer-section">
+                <h3>Часы работы</h3>
+                <p>Пн-Пт: 9:00 - 18:00</p>
+                <p>Сб: 10:00 - 15:00</p>
+                <p>Вс: выходной</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 P. Все права защищены.</p>
+        </div>
+    </footer>
 </body>
 </html>
