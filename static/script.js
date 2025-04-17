@@ -1,3 +1,20 @@
+// Инициализация Firebase
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    databaseURL: "YOUR_DATABASE_URL",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+
+// Инициализация Firebase
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+import { ref, onValue, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+
 // Ждем загрузки DOM
 document.addEventListener('DOMContentLoaded', function() {
     // Проверяем существование необходимых элементов
@@ -11,59 +28,30 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    // Инициализация Pusher
-    const pusher = new Pusher('NZEdl04669f636mMy9XCkax3S_t20_0GToZQXd4Mj5Q', {
-        cluster: 'eu',
-        forceTLS: true
-    });
-
     // Загрузка сохраненного имени пользователя
     const savedUsername = localStorage.getItem('chatUsername');
     if (savedUsername) {
         nameInput.value = savedUsername;
     }
 
+    // Ссылка на сообщения в базе данных
+    const messagesRef = ref(database, 'messages');
+
     // Загрузка истории чата
-    const chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
-    console.log('Загружена история чата:', chatHistory.length, 'сообщений');
-
-    // Отображение истории чата при загрузке страницы
-    chatHistory.forEach(message => {
-        displayMessage(message);
-    });
-
-    // Подписка на общий канал чата
-    const channel = pusher.subscribe('public-chat');
-    console.log('Подписка на общий канал чата');
-
-    // Проверяем состояние подключения
-    pusher.connection.bind('connected', () => {
-        console.log('Pusher подключен');
+    onValue(messagesRef, (snapshot) => {
+        const messages = snapshot.val() || {};
+        messagesDiv.innerHTML = ''; // Очищаем текущие сообщения
         
-        // Отправляем информацию о новом пользователе
-        const joinData = {
-            username: savedUsername || 'Новый пользователь',
-            timestamp: new Date().toISOString()
-        };
+        // Преобразуем объект в массив и сортируем по времени
+        const messagesArray = Object.values(messages).sort((a, b) => a.timestamp - b.timestamp);
         
-        console.log('Отправка данных о подключении:', JSON.stringify(joinData, null, 2));
-        channel.trigger('client-joined', joinData);
-    });
-
-    // Обработка ошибок подключения
-    pusher.connection.bind('error', (err) => {
-        console.error('Ошибка подключения Pusher:', err);
-    });
-
-    // Обработка входящих сообщений
-    channel.bind('client-message', function(data) {
-        console.log('Получено сообщение:', JSON.stringify(data, null, 2));
-        displayMessage(data);
-        saveMessageToHistory(data);
+        messagesArray.forEach(message => {
+            displayMessage(message);
+        });
     });
 
     // Отправка сообщения
-    sendButton.addEventListener('click', function() {
+    sendButton.addEventListener('click', async function() {
         const username = nameInput.value.trim();
         const message = messageInput.value.trim();
         
@@ -84,35 +72,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const messageData = {
                 user: username,
                 message: message,
-                timestamp: new Date().toISOString()
+                timestamp: serverTimestamp()
             };
             
-            console.log('Отправка сообщения:', JSON.stringify(messageData, null, 2));
-            channel.trigger('client-message', messageData);
-            
-            // Отображаем сообщение локально
-            displayMessage(messageData);
-            
-            // Сохраняем сообщение в историю
-            saveMessageToHistory(messageData);
-            
+            // Добавляем сообщение в базу данных
+            await push(messagesRef, messageData);
             messageInput.value = '';
         } catch (error) {
             console.error('Error sending message:', error);
             alert('Ошибка при отправке сообщения. Пожалуйста, попробуйте снова.');
         }
     });
-
-    // Функция для сохранения сообщения в историю
-    function saveMessageToHistory(message) {
-        const chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
-        chatHistory.push(message);
-        if (chatHistory.length > 100) {
-            chatHistory.shift();
-        }
-        localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
-        console.log('Сообщение сохранено в историю. Всего сообщений:', chatHistory.length);
-    }
 
     // Функция для отображения сообщений
     function displayMessage(data) {
