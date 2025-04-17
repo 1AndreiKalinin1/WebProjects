@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function sendMessage(message) {
-        fetch('http://YOUR_SERVER_URL/api/messages', {
+        fetch('http://localhost:3000/api/messages', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function fetchMessages() {
-        fetch('http://YOUR_SERVER_URL/api/messages')
+        fetch('http://localhost:3000/api/messages')
             .then(response => response.json())
             .then(data => {
                 data.forEach(displayMessage);

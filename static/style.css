@@ -1,0 +1,91 @@
+css
+
+Copy
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #007BFF;
+    color: white;
+    display: flex; /* Используем флекс для выравнивания */
+    align-items: center; /* Вертикальное выравнивание */
+    padding: 10px 20px; /* Добавляем отступы */
+}
+
+header h1 {
+    flex: 1; /* Позволяем заголовку занимать доступное пространство */
+    margin: 0; /* Убираем отступы */
+}
+
+nav {
+    display: flex; /* Используем флекс для навигации */
+}
+
+nav a {
+    color: white;
+    margin: 0 15px; /* Увеличиваем отступы между ссылками */
+    text-decoration: none;
+    font-weight: bold; /* Делаем текст жирным */
+    transition: color 0.3s; /* Плавный переход для эффекта наведения */
+}
+
+nav a:hover {
+    color: #FFD700; /* Изменение цвета при наведении */
+}
+
+main {
+    padding: 20px;
+}
+
+#chat {
+    border-top: 1px solid #ccc;
+    margin-top: 20px;
+    padding-top: 10px;
+    background: #f9f9f9; /* Фоновый цвет для секции чата */
+    border-radius: 5px; /* Закругление углов */
+}
+
+#messages {
+    max-height: 200px;
+    max-width: 50%;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: white; /* Фоновый цвет для области сообщений */
+    border-radius: 5px; /* Закругление углов */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень для эффекта глубины */
+}
+
+button {
+    background-color: #28a745; /* Новый цвет кнопки (зеленый) */
+    color: white;
+    border: none;
+    border-radius: 25px; /* Закругление углов для овального вида */
+    padding: 10px 20px; /* Отступы для создания формы кнопки */
+    font-size: 16px; /* Размер шрифта */
+    cursor: pointer; /* Указатель при наведении */
+    transition: background-color 0.3s; /* Плавный переход для цвета */
+}
+
+button:hover {
+    background-color: #218838; /* Более темный оттенок при наведении */
+}
+
+
+input[type="text"], textarea {
+    width: 100%; /* Ширина на 100% родительского контейнера */
+    padding: 10px; /* Отступы для удобства ввода */
+    border: 1px solid #ccc; /* Цвет границы */
+    border-radius: 5px; /* Закругление углов */
+    box-shadow: none; /* Убираем тень */
+    font-size: 20px; /* Размер шрифта */
+    resize: none; /* Убираем возможность изменения размера */
+}
+
+textarea {
+    height: 60px; /* Увеличиваем высоту на 2 строки */
+}

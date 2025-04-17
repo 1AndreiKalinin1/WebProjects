@@ -3,20 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="static/style.css">
     <title>Объект 1</title>
 </head>
 <body>
     <header>
-        <h1>Агентство Недвижимости</h1>
+        <h2>PropertyAgencySite</h2>
         <nav>
             <a href="index.html">Главная</a>
             <a href="objects.html">Объекты</a>
         </nav>
     </header>
     <main>
-        <h2>Объект 1</h2>
-        <p>Описание объекта...</p>
+        <h3>Объект 1</h3>
+        <section id="object-info">
+            <img src="img/obj1.jpg" alt="Описание объекта" id="object-image" />
+            <ul id="object-characteristics">
+                <li><strong>Характеристика 1:</strong> Значение 1</li>
+                <li><strong>Характеристика 2:</strong> Значение 2</li>
+                <li><strong>Характеристика 3:</strong> Значение 3</li>
+                <!-- Добавьте другие характеристики по необходимости -->
+            </ul>
+        </section>
 
         <div id="chat">
             <h3>Чат с владельцем</h3>
@@ -27,6 +35,6 @@
             </form>
         </div>
     </main>
-    <script src="script.js"></script>
+    <script src="static/script.js"></script>
 </body>
 </html>
