@@ -4,9 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const messageInput = document.getElementById('messageInput');
     const sendButton = document.getElementById('sendButton');
     const messagesDiv = document.getElementById('messages');
-    const chatList = document.getElementById('chatList');
 
-    if (!messageInput || !sendButton || !messagesDiv || !chatList) {
+    if (!messageInput || !sendButton || !messagesDiv) {
         console.error('Не найдены необходимые элементы DOM');
         return;
     }
@@ -17,87 +16,51 @@ document.addEventListener('DOMContentLoaded', function() {
         forceTLS: true
     });
 
-    // Хранилище активных чатов
-    const activeChats = new Map();
-    let currentChatId = null;
+    // Загрузка истории чата
+    const chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
+    console.log('Загружена история чата:', chatHistory.length, 'сообщений');
 
-    // Функция для создания элемента чата в списке
-    function createChatListItem(chatId, username) {
-        const chatItem = document.createElement('div');
-        chatItem.className = 'chat-list-item';
-        chatItem.dataset.chatId = chatId;
-        chatItem.innerHTML = `
-            <span class="chat-username">${username}</span>
-            <span class="chat-time">${new Date().toLocaleTimeString()}</span>
-        `;
-        
-        chatItem.addEventListener('click', () => switchChat(chatId));
-        return chatItem;
-    }
+    // Отображение истории чата при загрузке страницы
+    chatHistory.forEach(message => {
+        displayMessage(message);
+    });
 
-    // Функция для переключения между чатами
-    function switchChat(chatId) {
-        currentChatId = chatId;
-        // Обновляем активный элемент в списке
-        document.querySelectorAll('.chat-list-item').forEach(item => {
-            item.classList.toggle('active', item.dataset.chatId === chatId);
-        });
-        
-        // Очищаем и загружаем историю чата
-        messagesDiv.innerHTML = '';
-        const chatHistory = JSON.parse(localStorage.getItem(`chatHistory_${chatId}`) || '[]');
-        chatHistory.forEach(message => displayMessage(message));
-        
-        // Обновляем заголовок чата
-        document.querySelector('.chat-header h2').textContent = `Чат с ${activeChats.get(chatId).username}`;
-    }
+    // Подписка на общий канал чата
+    const channel = pusher.subscribe('public-chat');
+    console.log('Подписка на общий канал чата');
 
-    // Функция для подписки на новый чат
-    function subscribeToChat(chatId, username) {
-        if (!activeChats.has(chatId)) {
-            // Подписываемся на канал конкретного чата
-            const chatChannel = pusher.subscribe(chatId);
-            
-            // Сохраняем информацию о чате
-            activeChats.set(chatId, {
-                username: username,
-                channel: chatChannel
-            });
-            
-            // Добавляем чат в список
-            chatList.appendChild(createChatListItem(chatId, username));
-            
-            // Если это первый чат, автоматически переключаемся на него
-            if (activeChats.size === 1) {
-                switchChat(chatId);
-            }
-            
-            // Подписываемся на сообщения в этом чате
-            chatChannel.bind('client-message', function(data) {
-                console.log('Получено сообщение:', data);
-                if (currentChatId === chatId) {
-                    displayMessage(data);
-                }
-                saveMessageToHistory(data);
-            });
+    // Проверяем состояние подключения
+    pusher.connection.bind('connected', () => {
+        console.log('Pusher подключен');
+    });
 
-            // Подписываемся на события подключения клиентов
-            chatChannel.bind('client-joined', function(data) {
-                console.log('Клиент подключился:', data);
-                if (!activeChats.has(chatId)) {
-                    subscribeToChat(chatId, data.username);
-                }
-            });
-        }
-    }
+    // Обработка ошибок подключения
+    pusher.connection.bind('error', (err) => {
+        console.error('Ошибка подключения Pusher:', err);
+    });
+
+    // Обработка входящих сообщений
+    channel.bind('client-message', function(data) {
+        console.log('Получено сообщение:', JSON.stringify(data, null, 2));
+        displayMessage(data);
+        saveMessageToHistory(data);
+    });
+
+    // Обработка подключения новых пользователей
+    channel.bind('client-joined', function(data) {
+        console.log('Новый пользователь подключился:', JSON.stringify(data, null, 2));
+        const joinMessage = {
+            user: 'Система',
+            message: `${data.username} присоединился к чату`,
+            timestamp: new Date().toISOString(),
+            isSystem: true
+        };
+        displayMessage(joinMessage);
+        saveMessageToHistory(joinMessage);
+    });
 
     // Отправка сообщения
     sendButton.addEventListener('click', function() {
-        if (!currentChatId) {
-            alert('Выберите чат для отправки сообщения');
-            return;
-        }
-
         const message = messageInput.value.trim();
         if (!message) {
             alert('Пожалуйста, введите сообщение');
@@ -109,12 +72,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 user: 'Владелец',
                 message: message,
                 timestamp: new Date().toISOString(),
-                isOwner: true,
-                chatId: currentChatId
+                isOwner: true
             };
             
-            // Отправляем сообщение в конкретный чат
-            activeChats.get(currentChatId).channel.trigger('client-message', messageData);
+            console.log('Отправка сообщения:', JSON.stringify(messageData, null, 2));
+            channel.trigger('client-message', messageData);
             
             // Отображаем сообщение локально
             displayMessage(messageData);
@@ -131,18 +93,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Функция для сохранения сообщения в историю
     function saveMessageToHistory(message) {
-        const chatHistory = JSON.parse(localStorage.getItem(`chatHistory_${message.chatId}`) || '[]');
+        const chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
         chatHistory.push(message);
         if (chatHistory.length > 100) {
             chatHistory.shift();
         }
-        localStorage.setItem(`chatHistory_${message.chatId}`, JSON.stringify(chatHistory));
+        localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+        console.log('Сообщение сохранено в историю. Всего сообщений:', chatHistory.length);
     }
 
     // Функция для отображения сообщений
     function displayMessage(data) {
         const messageElement = document.createElement('div');
-        messageElement.className = `message ${data.isOwner ? 'owner-message' : 'customer-message'}`;
+        messageElement.className = `message ${data.isOwner ? 'owner-message' : data.isSystem ? 'system-message' : 'customer-message'}`;
         messageElement.innerHTML = `
             <strong>${data.user}</strong> 
             <span class="message-time">${new Date(data.timestamp).toLocaleTimeString()}</span>
@@ -151,5 +114,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         messagesDiv.appendChild(messageElement);
         messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        console.log('Сообщение отображено:', data.user, data.message);
     }
 }); 

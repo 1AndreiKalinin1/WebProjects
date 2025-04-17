@@ -46,6 +46,8 @@ main {
     border-radius: 4px;
     max-width: 1000px;
     width: 90%;
+    scroll-margin-top: 100px;
+    transition: all 0.5s ease;
 }
 
 .chat-header {
@@ -318,4 +320,699 @@ textarea {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     overflow: hidden;
+}
+
+/* Медиазапросы для адаптивного дизайна */
+@media (max-width: 768px) {
+    #chat {
+        width: 95%;
+        max-width: 100%;
+        margin: 10px auto;
+        padding: 10px;
+    }
+
+    .chat-header {
+        padding: 8px 10px;
+    }
+
+    .owner-info {
+        padding: 6px 8px;
+    }
+
+    .owner-photo {
+        width: 30px;
+        height: 30px;
+    }
+
+    .owner-name {
+        font-size: 14px;
+    }
+
+    .messages-container {
+        height: 300px;
+        padding: 10px;
+    }
+
+    .message {
+        padding: 8px 10px;
+        margin-bottom: 8px;
+        max-width: 85%;
+    }
+
+    .message-time {
+        font-size: 11px;
+    }
+
+    .input-container {
+        padding: 10px;
+    }
+
+    #messageInput {
+        font-size: 14px;
+        padding: 8px;
+        min-height: 60px;
+    }
+
+    #sendButton {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    #chat {
+        width: 100%;
+        margin: 5px auto;
+        padding: 8px;
+    }
+
+    .chat-header {
+        padding: 6px 8px;
+    }
+
+    .owner-info {
+        padding: 4px 6px;
+    }
+
+    .owner-photo {
+        width: 25px;
+        height: 25px;
+    }
+
+    .owner-name {
+        font-size: 12px;
+    }
+
+    .messages-container {
+        height: 250px;
+        padding: 8px;
+    }
+
+    .message {
+        padding: 6px 8px;
+        margin-bottom: 6px;
+        max-width: 90%;
+    }
+
+    .message strong {
+        font-size: 13px;
+    }
+
+    .message-text {
+        font-size: 13px;
+    }
+
+    .message-time {
+        font-size: 10px;
+    }
+
+    .input-container {
+        padding: 8px;
+    }
+
+    #messageInput {
+        font-size: 13px;
+        padding: 6px;
+        min-height: 50px;
+    }
+
+    #sendButton {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+}
+
+/* Стили для системных сообщений */
+.system-message {
+    background-color: #f0f0f0;
+    color: #666;
+    text-align: center;
+    font-style: italic;
+    max-width: 100% !important;
+    margin: 5px auto;
+}
+
+/* Стили для бургер-меню */
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 15px;
+}
+
+.burger-line {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+/* Стили для мобильной навигации */
+@media (max-width: 768px) {
+    .burger-menu {
+        display: flex;
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background-color: #5fbaee;
+        flex-direction: column;
+        padding: 20px;
+        transition: right 0.3s ease;
+        z-index: 1000;
+    }
+
+    nav.active {
+        right: 0;
+    }
+
+    nav a {
+        margin: 15px 0;
+        font-size: 18px;
+        padding: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Добавляем оверлей при открытом меню */
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+    .nav-overlay.active {
+        display: block;
+    }
+}
+
+/* Стили для главной страницы */
+.about-section {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-section h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.about-content {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.about-text ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.about-text li {
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+}
+
+.about-text li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #5fbaee;
+}
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.owners-section {
+    padding: 40px 20px;
+    background-color: #f5f5f5;
+}
+
+.owners-section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.owners-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.owner-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.owner-card:hover {
+    transform: translateY(-5px);
+}
+
+.owner-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.owner-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+.owner-card h3 {
+    margin: 10px 0;
+    color: #333;
+}
+
+.owner-card p {
+    margin: 5px 0;
+    color: #666;
+}
+
+/* Стили для страницы объектов */
+.objects-section {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.objects-section h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.objects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.object-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.object-card:hover {
+    transform: translateY(-5px);
+}
+
+.object-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.object-info {
+    padding: 20px;
+}
+
+.object-info h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.object-info p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.object-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 16px;
+    background-color: #5fbaee;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.object-link:hover {
+    background-color: #4aa8d8;
+}
+
+/* Медиазапросы для адаптивного дизайна */
+@media (max-width: 1024px) {
+    .about-content {
+        flex-direction: column;
+    }
+
+    .owners-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .objects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .about-section, .owners-section, .objects-section {
+        padding: 20px;
+    }
+
+    .owners-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .objects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .owner-card img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-section h1, .owners-section h2, .objects-section h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .owner-card, .object-card {
+        padding: 15px;
+    }
+
+    .object-card img {
+        height: 150px;
+    }
+}
+
+/* Стили для страницы объекта */
+.object-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.object-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.thumbnail-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.thumbnail {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.thumbnail:hover {
+    transform: scale(1.05);
+}
+
+.object-info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.price-tag {
+    font-size: 28px;
+    font-weight: bold;
+    color: #5fbaee;
+    margin: 10px 0;
+}
+
+.object-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+.feature {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.feature-label {
+    color: #666;
+}
+
+.feature-value {
+    font-weight: 500;
+    color: #333;
+}
+
+.object-description {
+    line-height: 1.6;
+}
+
+.object-description h2,
+.object-amenities h2,
+.contact-section h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.object-amenities ul {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.object-amenities li {
+    padding-left: 25px;
+    position: relative;
+}
+
+.object-amenities li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #5fbaee;
+}
+
+.contact-section {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.contact-info {
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    margin: 10px 0;
+    color: #666;
+}
+
+.contact-button {
+    padding: 12px 24px;
+    background-color: #5fbaee;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-button:hover {
+    background-color: #4aa8d8;
+    transform: translateY(-2px);
+}
+
+.contact-button:active {
+    transform: translateY(1px);
+}
+
+.contact-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.contact-button:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
+}
+
+/* Медиазапросы для страницы объекта */
+@media (max-width: 1024px) {
+    .object-details {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .main-image {
+        height: 300px;
+    }
+
+    .object-features {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .object-details {
+        padding: 20px;
+    }
+
+    .main-image {
+        height: 250px;
+    }
+
+    .thumbnail {
+        height: 80px;
+    }
+
+    .price-tag {
+        font-size: 24px;
+    }
+
+    .object-amenities ul {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .object-details {
+        padding: 15px;
+    }
+
+    .main-image {
+        height: 200px;
+    }
+
+    .thumbnail {
+        height: 60px;
+    }
+
+    .price-tag {
+        font-size: 20px;
+    }
+
+    .feature {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .contact-button {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+/* Анимация прокрутки к чату */
+@keyframes smoothScroll {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100px);
+    }
+}
+
+.smooth-scroll {
+    animation: smoothScroll 0.5s ease-out forwards;
+}
+
+/* Анимации для главной страницы */
+section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
 }

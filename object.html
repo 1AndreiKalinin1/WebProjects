@@ -4,37 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/style.css">
-    <title>Объект 1</title>
+    <title>PropertyAgencySite - Объект недвижимости</title>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js" defer></script>
+    <script src="static/script.js" defer></script>
 </head>
 <body>
     <header>
         <h2>PropertyAgencySite</h2>
+        <div class="burger-menu">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+        </div>
         <nav>
             <a href="index.html">Главная</a>
             <a href="objects.html">Объекты</a>
+            <a href="#">О нас</a>
+            <a href="#">Контакты</a>
         </nav>
+        <div class="nav-overlay"></div>
     </header>
     <main>
-        <h3>Объект 1</h3>
-        <section id="object-info">
-            <img src="img/obj1.jpg" alt="Описание объекта" id="object-image" />
-            <ul id="object-characteristics">
-                <li><strong>Характеристика 1:</strong> Значение 1</li>
-                <li><strong>Характеристика 2:</strong> Значение 2</li>
-                <li><strong>Характеристика 3:</strong> Значение 3</li>
-                <!-- Добавьте другие характеристики по необходимости -->
-            </ul>
+        <section class="object-details">
+            <div class="object-gallery">
+                <img src="img/obj1.jpg" alt="Главное фото объекта" class="main-image">
+                <div class="thumbnail-container">
+                    <img src="img/obj1.jpg" alt="Фото 1" class="thumbnail">
+                    <img src="img/obj1_2.avif" alt="Фото 2" class="thumbnail">
+                    <img src="img/obj1_3.avif" alt="Фото 3" class="thumbnail">
+                </div>
+            </div>
+            <div class="object-info">
+                <h1>Элитная квартира в центре</h1>
+                <div class="price-tag">500 000 BYN</div>
+                <div class="object-features">
+                    <div class="feature">
+                        <span class="feature-label">Площадь:</span>
+                        <span class="feature-value">120 м²</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Комнат:</span>
+                        <span class="feature-value">3</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Этаж:</span>
+                        <span class="feature-value">12/15</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-label">Год постройки:</span>
+                        <span class="feature-value">2020</span>
+                    </div>
+                </div>
+                <div class="object-description">
+                    <h2>Описание</h2>
+                    <p>Просторная трехкомнатная квартира в элитном жилом комплексе в центре города. Панорамные окна с видом на исторический центр. Современная отделка, система "умный дом", подземный паркинг. Рядом метро, парки, школы и детские сады.</p>
+                </div>
+                <div class="object-amenities">
+                    <h2>Особенности</h2>
+                    <ul>
+                        <li>Панорамные окна</li>
+                        <li>Система "умный дом"</li>
+                        <li>Подземный паркинг</li>
+                        <li>Консьерж-сервис</li>
+                        <li>Фитнес-центр</li>
+                        <li>Детская площадка</li>
+                    </ul>
+                </div>
+                <div class="contact-section">
+                    <h2>Контактная информация</h2>
+                    <div class="contact-info">
+                        <p>Телефон: +375 (29) 123-45-67</p>
+                        <p>Email: info@agency.by</p>
+                        <p>Адрес: ул. Центральная, 1</p>
+                    </div>
+                    <button class="contact-button">Связаться с агентом</button>
+                </div>
+            </div>
         </section>
-
         <div id="chat">
-            <h3>Чат с владельцем</h3>
-            <div id="messages"></div>
-            <form id="chat-form">
-                <input type="text" id="message-input" placeholder="Введите ваше сообщение" required>
-                <button type="submit">Отправить</button>
-            </form>
+            <div class="chat-header">
+                <div class="owner-info">
+                    <img src="img/owner1.jfif" alt="Владелец" class="owner-photo">
+                    <span class="owner-name">Иван Иванов</span>
+                </div>
+            </div>
+            <div class="messages-container" id="messages"></div>
+            <div class="input-container">
+                <input type="text" id="nameInput" placeholder="Ваше имя">
+                <textarea id="messageInput" placeholder="Введите сообщение..."></textarea>
+                <button id="sendButton">Отправить</button>
+            </div>
         </div>
     </main>
-    <script src="static/script.js"></script>
 </body>
 </html>

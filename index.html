@@ -4,19 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/style.css">
-    <title>Агентство Недвижимости</title>
+    <title>PropertyAgencySite</title>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js" defer></script>
+    <script src="static/script.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>Агентство Недвижимости</h1>
+        <h2>PropertyAgencySite</h2>
+        <div class="burger-menu">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+        </div>
         <nav>
             <a href="index.html">Главная</a>
-            <a href=""objects.html"">Объекты</a>
+            <a href="objects.html">Объекты</a>
+            <a href="#">О нас</a>
+            <a href="#">Контакты</a>
         </nav>
+        <div class="nav-overlay"></div>
     </header>
     <main>
-        <h2>Добро пожаловать!</h2>
-        <p>Ищите свою идеальную недвижимость.</p>
+        <section class="about-section">
+            <h1>Добро пожаловать в PropertyAgencySite</h1>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Мы - команда профессионалов с многолетним опытом работы на рынке недвижимости. Наше агентство специализируется на продаже и аренде элитной недвижимости в лучших районах города.</p>
+                    <p>Наши преимущества:</p>
+                    <ul>
+                        <li>Более 10 лет успешной работы</li>
+                        <li>Профессиональная команда экспертов</li>
+                        <li>Индивидуальный подход к каждому клиенту</li>
+                        <li>Гарантия конфиденциальности</li>
+                        <li>Прямое общение с владельцами</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="img/agency.jfif" alt="Наше агентство">
+                </div>
+            </div>
+        </section>
+
+        <section class="owners-section">
+            <h2>Наши владельцы</h2>
+            <div class="owners-grid">
+                <div class="owner-card">
+                    <img src="img/owner1.jfif" alt="Владелец 1">
+                    <h3>Иван Иванов</h3>
+                    <p>Специализация: элитная недвижимость</p>
+                    <p>Опыт: 15 лет</p>
+                </div>
+                <div class="owner-card">
+                    <img src="img/owner2.jfif" alt="Владелец 2">
+                    <h3>Мария Петрова</h3>
+                    <p>Специализация: коммерческая недвижимость</p>
+                    <p>Опыт: 12 лет</p>
+                </div>
+                <div class="owner-card">
+                    <img src="img/owner3.jpg" alt="Владелец 3">
+                    <h3>Алексей Сидоров</h3>
+                    <p>Специализация: загородная недвижимость</p>
+                    <p>Опыт: 10 лет</p>
+                </div>
+            </div>
+        </section>
     </main>
 </body>
 </html>
