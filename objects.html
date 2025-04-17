@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/style.css">
-    <title>PropertyAgencySite - Объекты недвижимости</title>
+    <title>Объекты недвижимости</title>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script src="static/script.js"></script>
 </head>
 <body>
     <header>
-        <h2>PropertyAgencySite</h2>
+        <h2>Агентство недвижимости</h2>
         <div class="burger-menu">
             <span class="burger-line"></span>
             <span class="burger-line"></span>
@@ -25,61 +25,68 @@
         <div class="nav-overlay"></div>
     </header>
     <main>
-        <section class="objects-grid">
-            <div class="object-card">
-                <img src="img/obj1.jpg" alt="Объект 1">
-                <div class="object-info">
-                    <h3>Элитная квартира в центре</h3>
-                    <p class="object-address">ул. Ленина, 15</p>
-                    <div class="object-features">
-                        <span>120 м²</span>
-                        <span>3 комнаты</span>
-                        <span>12/15 этаж</span>
+        <section class="objects-section">
+            <h1>Наши объекты</h1>
+            <div class="objects-grid">
+                <div class="object-card">
+                    <img src="img/obj1.jpg" alt="Объект 1">
+                    <div class="object-info">
+                        <h3>Элитная квартира в центре</h3>
+                        <p>Площадь: 120 м²</p>
+                        <p>Комнат: 3</p>
+                        <p>Цена: 15 000 000 ₽</p>
+                        <a href="object.html?id=1" class="object-link">Подробнее</a>
                     </div>
-                    <div class="object-price">500 000 BYN</div>
-                    <a href="object.html" class="view-button">Подробнее</a>
                 </div>
-            </div>
-            <div class="object-card">
-                <img src="img/obj2.jpg" alt="Объект 2">
-                <div class="object-info">
-                    <h3>Квартира в новостройке</h3>
-                    <p class="object-address">пр. Независимости, 45</p>
-                    <div class="object-features">
-                        <span>85 м²</span>
-                        <span>2 комнаты</span>
-                        <span>7/9 этаж</span>
+                <div class="object-card">
+                    <img src="img/obj2.jpg" alt="Объект 2">
+                    <div class="object-info">
+                        <h3>Загородный дом</h3>
+                        <p>Площадь: 250 м²</p>
+                        <p>Комнат: 5</p>
+                        <p>Цена: 25 000 000 ₽</p>
+                        <a href="object.html?id=2" class="object-link">Подробнее</a>
                     </div>
-                    <div class="object-price">350 000 BYN</div>
-                    <a href="object.html" class="view-button">Подробнее</a>
                 </div>
-            </div>
-            <div class="object-card">
-                <img src="img/obj3.jpg" alt="Объект 3">
-                <div class="object-info">
-                    <h3>Загородный дом</h3>
-                    <p class="object-address">д. Зеленый Бор, ул. Лесная, 8</p>
-                    <div class="object-features">
-                        <span>200 м²</span>
-                        <span>5 комнат</span>
-                        <span>2 этажа</span>
+                <div class="object-card">
+                    <img src="img/obj3.jpg" alt="Объект 3">
+                    <div class="object-info">
+                        <h3>Офисное помещение</h3>
+                        <p>Площадь: 180 м²</p>
+                        <p>Этаж: 5</p>
+                        <p>Цена: 30 000 000 ₽</p>
+                        <a href="object.html?id=3" class="object-link">Подробнее</a>
                     </div>
-                    <div class="object-price">800 000 BYN</div>
-                    <a href="object.html" class="view-button">Подробнее</a>
                 </div>
-            </div>
-            <div class="object-card">
-                <img src="img/obj4.jpg" alt="Объект 4">
-                <div class="object-info">
-                    <h3>Офисное помещение</h3>
-                    <p class="object-address">ул. Советская, 25</p>
-                    <div class="object-features">
-                        <span>150 м²</span>
-                        <span>Открытая планировка</span>
-                        <span>1 этаж</span>
+                <div class="object-card">
+                    <img src="img/obj4.jpg" alt="Объект 4">
+                    <div class="object-info">
+                        <h3>Квартира с видом на море</h3>
+                        <p>Площадь: 85 м²</p>
+                        <p>Комнат: 2</p>
+                        <p>Цена: 12 000 000 ₽</p>
+                        <a href="object.html?id=4" class="object-link">Подробнее</a>
                     </div>
-                    <div class="object-price">600 000 BYN</div>
-                    <a href="object.html" class="view-button">Подробнее</a>
+                </div>
+                <div class="object-card">
+                    <img src="img/obj5.jpg" alt="Объект 5">
+                    <div class="object-info">
+                        <h3>Таунхаус</h3>
+                        <p>Площадь: 150 м²</p>
+                        <p>Комнат: 4</p>
+                        <p>Цена: 18 000 000 ₽</p>
+                        <a href="object.html?id=5" class="object-link">Подробнее</a>
+                    </div>
+                </div>
+                <div class="object-card">
+                    <img src="img/obj6.jpg" alt="Объект 6">
+                    <div class="object-info">
+                        <h3>Пентхаус</h3>
+                        <p>Площадь: 200 м²</p>
+                        <p>Комнат: 4</p>
+                        <p>Цена: 35 000 000 ₽</p>
+                        <a href="object.html?id=6" class="object-link">Подробнее</a>
+                    </div>
                 </div>
             </div>
         </section>

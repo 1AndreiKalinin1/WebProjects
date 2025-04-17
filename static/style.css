@@ -501,6 +501,18 @@ textarea {
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 
+    .burger-menu.active .burger-line:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+
+    .burger-menu.active .burger-line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .burger-menu.active .burger-line:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+
     /* Добавляем оверлей при открытом меню */
     .nav-overlay {
         display: none;
@@ -600,18 +612,10 @@ textarea {
     text-align: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .owner-card:hover {
     transform: translateY(-5px);
-}
-
-.owner-card.visible {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .owner-card img {
@@ -1003,16 +1007,4 @@ textarea {
 
 .smooth-scroll {
     animation: smoothScroll 0.5s ease-out forwards;
-}
-
-/* Анимации для главной страницы */
-section {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-section.visible {
-    opacity: 1;
-    transform: translateY(0);
 }
